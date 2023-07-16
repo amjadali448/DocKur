@@ -1,0 +1,32 @@
+.ContainerCard {
+    text-align: center;
+    overflow: hidden;
+  }
+.data{
+    margin-left: 252px;
+  }
+  .data-div{
+    margin-top: 20px;
+    margin-left: 300px;
+    margin-right: 10px;
+    height: 250px;
+    width: 400px;
+    background-color: #17222a;
+  }
+  .data-div:hover{
+    border: 1px solid #9647fe;
+  }
+  .img{
+    width: 27px;
+    height: 27px;
+  }
+  .button{
+    margin-top: 2px;
+    border: 2px solid #76cdb2;
+    /* padding: 10px; */
+    margin-right: 14px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #17222a;
+  }
