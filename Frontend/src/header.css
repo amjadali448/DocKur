@@ -63,7 +63,8 @@
     color: white;
 }
 .line{
-    top: 60px;
+    top: 70px;
+    right: 5px;
     color: #27353f;
     position:absolute;
     font-weight: bolder;
