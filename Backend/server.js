@@ -37,6 +37,20 @@ app.post('/connect-ubuntu', async (req, res) => {
     }
 });
 
+app.post ('/inspect-container',async(req,res)=>{
+  try{
+    const dockerApiUrl = `http://127.0.0.1:2375/containers/nervous_spence/json`;
+        const dockerApiresponse = await axios.get(dockerApiUrl,{httpsAgent});
+        console.log(dockerApiresponse.data);
+        res.json(dockerApiresponse.data);
+    } 
+    catch (error) 
+    {
+        console.error('connection error:', error);
+        res.status(500).send('Error connecting to the Docker');
+    }
+});
+
 app.post ('/container-list',async(req,res)=>{
   try{
     const dockerApiUrl = `http://127.0.0.1:2375/containers/json?all=true`;
