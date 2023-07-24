@@ -48,7 +48,7 @@ export default function Header(props) {
   
   function PopUpMenu() {
     const handleItemClick = (item) => {
-        props.onItemClick(item); // Call the onItemClick prop passed from App.js
+        props.onItemClick(item);
     };
   
     return (
