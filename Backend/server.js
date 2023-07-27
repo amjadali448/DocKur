@@ -82,9 +82,8 @@ app.post ('/container-list',async(req,res)=>{
 app.post('/Create-container', async (req, res) => {
   const containerData = {
     "Image": "nginx:latest",
-    "Name": "my-container",
+    "Name": "my-container1",
     "Cmd": ["nginx", "-g", "daemon off;"],
-    "Env": ["VAR1=value1", "VAR2=value2"],
     "HostConfig": {
       "PortBindings": {
         "80/tcp": [
@@ -93,18 +92,8 @@ app.post('/Create-container', async (req, res) => {
           }
         ]
       }
-    },
-    "NetworkingConfig": {
-      "EndpointsConfig": {
-        "bridge": {
-          "IPAMConfig": {
-            "IPv4Address": "172.18.0.2"
-          }
-        }
-      }
     }
   };
-
   try {
     const createContainerApi = 'http://127.0.0.1:2375/containers/create';
     const dockerApiResponse = await axios.post(createContainerApi, containerData, { httpsAgent });
@@ -116,12 +105,11 @@ app.post('/Create-container', async (req, res) => {
   }
 });
 
-// issue in starting
 app.post('/start-container', async (req, res) => {
   try {
-    const startContainerApi = `http://127.0.0.1:2375/containers/objective_nash/start`;
+    const startContainerApi = 'http://127.0.0.1:2375/containers/64acc773fcb3ea8c0302b0a9486917d51733d3cc397e67143ce1ec37cd47ee79/start';
 
-    const dockerApiResponse = await axios.post(startContainerApi,{ httpsAgent });
+    const dockerApiResponse = await axios.post(startContainerApi, {}, { httpsAgent });
     console.log(dockerApiResponse.data);
     res.json(dockerApiResponse.data);
   } catch (error) {
@@ -132,7 +120,7 @@ app.post('/start-container', async (req, res) => {
 
 app.post('/stop-container', async (req, res) => {
   try {
-    const stopContainerApi = 'http://127.0.0.1:2375/containers/lucid_cartwright/stop';
+    const stopContainerApi = 'http://127.0.0.1:2375/containers/64acc773fcb3ea8c0302b0a9486917d51733d3cc397e67143ce1ec37cd47ee79/stop';
     const dockerApiResponse = await axios.post(stopContainerApi,{ httpsAgent });
     console.log(dockerApiResponse.data);
     res.json(dockerApiResponse.data);
@@ -147,12 +135,12 @@ app.post('/stop-container', async (req, res) => {
   }
 });
 
-// issue in restart
 app.post('/restart-container', async (req, res) => {
   try {
-    const restartContainerApi = 'http://127.0.0.1:2375/containers/lucid_cartwright/restart';
+    const restartContainerApi = 'http://127.0.0.1:2375/containers/64acc773fcb3ea8c0302b0a9486917d51733d3cc397e67143ce1ec37cd47ee79/restart';
     const dockerApiResponse = await axios.post(restartContainerApi,{ httpsAgent });
     console.log(dockerApiResponse.data);
+    console.log("Amjad");
     res.json(dockerApiResponse.data);
   } catch (error) {
       console.error('Container Error:', error);
@@ -160,11 +148,11 @@ app.post('/restart-container', async (req, res) => {
   }
 });
 
-// issue in removing
-app.delete('/removing-container', async (req, res) => {
+
+app.post('/removing-container', async (req, res) => {
   try {
-    const removeContainerApi = 'http://127.0.0.1:2375/containers/1a06535b763f';
-    const dockerApiResponse = await axios.post(removeContainerApi,{ httpsAgent });
+    const removeContainerApi = 'http://127.0.0.1:2375/containers/64acc773fcb3ea8c0302b0a9486917d51733d3cc397e67143ce1ec37cd47ee79?force=true';
+    const dockerApiResponse = await axios.delete(removeContainerApi,{ httpsAgent });
     console.log(dockerApiResponse.data);
     res.json(dockerApiResponse.data);
   } catch (error) {
