@@ -39,7 +39,7 @@ app.post('/connect-ubuntu', async (req, res) => {
 
 app.post ('/inspect-container',async(req,res)=>{
   try{
-    const dockerApiUrl = `http://127.0.0.1:2375/containers/nervous_spence/json`;
+    const dockerApiUrl = `http://127.0.0.1:2375/containers/0199ded799e06b014752943ee931d33dd56b474d1c3a1bdfc3b88dbbbc8ad5b6/json`;
         const dockerApiresponse = await axios.get(dockerApiUrl,{httpsAgent});
         console.log(dockerApiresponse.data);
         res.json(dockerApiresponse.data);
@@ -53,8 +53,22 @@ app.post ('/inspect-container',async(req,res)=>{
 
 app.post ('/container-logs',async(req,res)=>{
   try{
-    const dockerApiUrl = `http://127.0.0.1:2375/containers/nervous_spence/logs?stderr=true`;
+    const dockerApiUrl = `http://127.0.0.1:2375/containers/0199ded799e06b014752943ee931d33dd56b474d1c3a1bdfc3b88dbbbc8ad5b6/logs?stderr=true`;
         const dockerApiresponse = await axios.get(dockerApiUrl,{httpsAgent});
+        console.log(dockerApiresponse.data);
+        res.json(dockerApiresponse.data);
+    } 
+    catch (error) 
+    {
+        console.error('connection error:', error);
+        res.status(500).send('Error connecting to the Docker');
+    }
+});
+
+app.post ('/container-stats',async(req,res)=>{
+  try{
+    const StatsApiUrl = `http://127.0.0.1:2375/containers/0199ded799e06b014752943ee931d33dd56b474d1c3a1bdfc3b88dbbbc8ad5b6/stats`;
+        const dockerApiresponse = await axios.get(StatsApiUrl,{httpsAgent});
         console.log(dockerApiresponse.data);
         res.json(dockerApiresponse.data);
     } 
@@ -107,7 +121,7 @@ app.post('/Create-container', async (req, res) => {
 
 app.post('/start-container', async (req, res) => {
   try {
-    const startContainerApi = 'http://127.0.0.1:2375/containers/64acc773fcb3ea8c0302b0a9486917d51733d3cc397e67143ce1ec37cd47ee79/start';
+    const startContainerApi = 'http://127.0.0.1:2375/containers/0199ded799e06b014752943ee931d33dd56b474d1c3a1bdfc3b88dbbbc8ad5b6/start';
 
     const dockerApiResponse = await axios.post(startContainerApi, {}, { httpsAgent });
     console.log(dockerApiResponse.data);
@@ -120,7 +134,7 @@ app.post('/start-container', async (req, res) => {
 
 app.post('/stop-container', async (req, res) => {
   try {
-    const stopContainerApi = 'http://127.0.0.1:2375/containers/64acc773fcb3ea8c0302b0a9486917d51733d3cc397e67143ce1ec37cd47ee79/stop';
+    const stopContainerApi = 'http://127.0.0.1:2375/containers/0199ded799e06b014752943ee931d33dd56b474d1c3a1bdfc3b88dbbbc8ad5b6/stop';
     const dockerApiResponse = await axios.post(stopContainerApi,{ httpsAgent });
     console.log(dockerApiResponse.data);
     res.json(dockerApiResponse.data);
@@ -137,7 +151,7 @@ app.post('/stop-container', async (req, res) => {
 
 app.post('/restart-container', async (req, res) => {
   try {
-    const restartContainerApi = 'http://127.0.0.1:2375/containers/64acc773fcb3ea8c0302b0a9486917d51733d3cc397e67143ce1ec37cd47ee79/restart';
+    const restartContainerApi = 'http://127.0.0.1:2375/containers/0199ded799e06b014752943ee931d33dd56b474d1c3a1bdfc3b88dbbbc8ad5b6/restart';
     const dockerApiResponse = await axios.post(restartContainerApi,{ httpsAgent });
     console.log(dockerApiResponse.data);
     console.log("Amjad");
@@ -151,7 +165,7 @@ app.post('/restart-container', async (req, res) => {
 
 app.post('/removing-container', async (req, res) => {
   try {
-    const removeContainerApi = 'http://127.0.0.1:2375/containers/64acc773fcb3ea8c0302b0a9486917d51733d3cc397e67143ce1ec37cd47ee79?force=true';
+    const removeContainerApi = 'http://127.0.0.1:2375/containers/0199ded799e06b014752943ee931d33dd56b474d1c3a1bdfc3b88dbbbc8ad5b6?force=true';
     const dockerApiResponse = await axios.delete(removeContainerApi,{ httpsAgent });
     console.log(dockerApiResponse.data);
     res.json(dockerApiResponse.data);
@@ -173,9 +187,9 @@ app.post('/delete-stopped-containers', async (req, res) => {
   }
 });
 
-app.post('/pause-containers', async (req, res) => {
+app.post('/pause-container', async (req, res) => {
   try {
-    const pauseContainerApi = 'http://127.0.0.1:2375/containers/flamboyant_goldberg/pause';
+    const pauseContainerApi = 'http://127.0.0.1:2375/containers/0199ded799e06b014752943ee931d33dd56b474d1c3a1bdfc3b88dbbbc8ad5b6/pause';
     const dockerApiResponse = await axios.post(pauseContainerApi,{ httpsAgent });
     console.log(dockerApiResponse.data);
     res.json(dockerApiResponse.data);
@@ -186,6 +200,23 @@ app.post('/pause-containers', async (req, res) => {
     else{
       console.error('Container Error:', error);
       res.status(500).send('Error Stopping Docker Container');
+    }
+  }
+});
+
+app.post('/unpause-container', async (req, res) => {
+  try {
+    const unpauseContainerApi = 'http://127.0.0.1:2375/containers/0199ded799e06b014752943ee931d33dd56b474d1c3a1bdfc3b88dbbbc8ad5b6/unpause';
+    const dockerApiResponse = await axios.post(unpauseContainerApi,{ httpsAgent });
+    console.log(dockerApiResponse.data);
+    res.json(dockerApiResponse.data);
+  } catch (error) {
+    if (error.response && error.response.status === 500) {
+      res.status(200).send('Container is not Paused.');
+    }
+    else{
+      console.error('Container Error:', error);
+      res.status(500).send('Error Unpausing Docker Container');
     }
   }
 });
