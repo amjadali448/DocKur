@@ -254,6 +254,23 @@ app.post('/initiate-docker-build', async (req, res) => {
   }
 });
 
+app.post('/delete-image', async (req, res) => {
+  try {
+    const deleteImageApi = 'http://127.0.0.1:2375/images/a416a98b71e2?force=true';
+
+    // Pass httpsAgent as a separate option in the Axios request configuration
+    const dockerApiResponse = await axios.delete(deleteImageApi, {
+      httpsAgent: httpsAgent, // Replace httpsAgent with your actual agent object
+    });
+
+    console.log(dockerApiResponse.data);
+    res.json(dockerApiResponse.data);
+  } catch (error) {
+    console.error('Image Error:', error);
+    res.status(500).send('Error Removing Docker Image');
+  }
+});
+
 app.listen(3001, () => {
   console.log('Server is running on port 3001');
 });
