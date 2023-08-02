@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const https = require('https');
 const axios = require('axios');
+const fs = require('fs');
 
 
 const app = express();
@@ -218,6 +219,38 @@ app.post('/unpause-container', async (req, res) => {
       console.error('Container Error:', error);
       res.status(500).send('Error Unpausing Docker Container');
     }
+  }
+});
+
+app.post('/initiate-docker-build', async (req, res) => {
+  console.log('amjad');
+  try {
+    const buildImageApi = 'http://127.0.0.1:2375/build?t=amjad';
+    const tarballFilePath = '/home/amjad/DockerFiles/busybox.tar.gz';
+    
+
+    // Read the tarball content
+    const tarballData = fs.readFileSync(tarballFilePath);
+    console.log(tarballData);
+    console.log('amjad1');
+    // Make a POST request to the Docker Engine API to initiate the build
+    const response = await axios.post(buildImageApi, tarballData, {
+      headers: {
+        'Content-Type': 'application/tar',
+      },
+    });
+
+    // Check the response status and handle accordingly
+    if (response.status === 200) {
+      console.log('Build initiated successfully');
+      res.json({ message: 'Build initiated successfully' });
+    } else {
+      console.error('Failed to initiate build:', response.status, response.data);
+      res.status(response.status).json({ error: 'Failed to initiate build' });
+    }
+  } catch (error) {
+    console.error('An error occurred while initiating the build:', error.message);
+    res.status(500).send('Error Initiating Docker Build');
   }
 });
 
