@@ -271,6 +271,35 @@ app.post('/delete-image', async (req, res) => {
   }
 });
 
+app.get ('/search-image',async(req,res)=>{
+  try{
+    const searchImagesApiUrl = `http://127.0.0.1:2375/images/search?term=ubuntu&limit=5`;
+        const dockerApiresponse = await axios.get(searchImagesApiUrl,{httpsAgent});
+        console.log(dockerApiresponse.data);
+        res.json(dockerApiresponse.data);
+    } 
+    catch (error) 
+    {
+        console.error('connection error:', error);
+        res.status(500).send('Error getting Docker images');
+    }
+});
+
+app.post('/import-image', async (req, res) => {
+  try {
+    const importImagesApiUrl = `http://127.0.0.1:2375/images/create?fromImage=ubuntu&tag=latest`;
+    const headers = {
+      'Content-Type': 'application/json',
+      };
+    const dockerApiResponse = await axios.post(importImagesApiUrl, {httpsAgent}, {headers: headers});
+    console.log(dockerApiResponse.data);
+    res.json(dockerApiResponse.data);
+  } catch (error) {
+    console.error('Connection error:', error);
+    res.status(500).send('Error importing Docker image');
+  }
+});
+
 app.listen(3001, () => {
   console.log('Server is running on port 3001');
 });
