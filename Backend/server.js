@@ -355,6 +355,21 @@ app.post('/export-image', async (req, res) => {
   }
 });
 
+app.post('/pull-image', async (req, res) => {
+  try {
+    const pullImagesApiUrl = `http://127.0.0.1:2375/images/create?fromImage=amjad123ali/dockur_fyp&tag=busybox`;
+    const headers = {
+      'Content-Type': 'application/json',
+      };
+    const dockerApiResponse = await axios.post(pullImagesApiUrl, {httpsAgent}, {headers: headers});
+    console.log(dockerApiResponse.data);
+    res.json(dockerApiResponse.data);
+  } catch (error) {
+    console.error('Connection error:', error);
+    res.status(500).send('Pulling Docker image');
+  }
+});
+
 app.listen(3001, () => {
   console.log('Server is running on port 3001');
 });
