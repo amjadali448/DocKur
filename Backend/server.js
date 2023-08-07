@@ -287,7 +287,7 @@ app.get ('/search-image',async(req,res)=>{
 
 app.post('/import-image', async (req, res) => {
   try {
-    const importImagesApiUrl = `http://127.0.0.1:2375/images/create?fromImage=ubuntu&tag=latest`;
+    const importImagesApiUrl = `http://127.0.0.1:2375/images/create?fromImage=redis&tag=latest`;
     const headers = {
       'Content-Type': 'application/json',
       };
@@ -297,6 +297,61 @@ app.post('/import-image', async (req, res) => {
   } catch (error) {
     console.error('Connection error:', error);
     res.status(500).send('Error importing Docker image');
+  }
+});
+
+app.post('/tag-image', async (req, res) => {
+  try {
+    const dockerHubUsername = 'amjad123ali';
+    const dockerHubPassword = 'i170157@nu';
+    const imageName = 'busybox';
+    const targetRepo = 'amjad123ali/dockur_fyp';
+    const targetTag = 'busybox';
+
+    const tagImagesApiUrl = `http://127.0.0.1:2375/images/${imageName}/tag?repo=${targetRepo}&tag=${targetTag}`;
+    const authConfig = {
+      username: dockerHubUsername,
+      password: dockerHubPassword,
+    };
+    const base64Auth = Buffer.from(JSON.stringify(authConfig)).toString('base64');
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'X-Registry-Auth': base64Auth,
+    };
+
+    const dockerApiResponse = await axios.post(tagImagesApiUrl, null, {
+      headers: headers,
+    });
+
+    console.log(dockerApiResponse.data);
+    res.json(dockerApiResponse.data);
+  } catch (error) {
+    console.error('Connection error:', error);
+    res.status(500).send('Error tagging the Docker image');
+  }
+});
+
+app.post('/export-image', async (req, res) => {
+  const user = 'amjad123ali';
+  const pass = 'dckr_pat_Y-PM-Guumhgf3pIFiFYqqroXoD0'
+  try {
+    const authConfig = {
+      username: user,
+      password: pass,
+    };
+    const authString = Buffer.from(JSON.stringify(authConfig)).toString('base64');
+    const headers = {
+      'Content-Type': 'application/json',
+      'X-Registry-Auth': authString,
+    };
+    const pushImageApiUrl = `http://127.0.0.1:2375/images/amjad123ali/dockur_fyp:busybox/push`;
+    const dockerApiResponse = await axios.post(pushImageApiUrl, null, { headers });
+    console.log(dockerApiResponse.data);
+    res.json(dockerApiResponse.data);
+  } catch (error) {
+    console.error('Connection error:', error);
+    res.status(500).send('Error Pushing the Docker image');
   }
 });
 
