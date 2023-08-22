@@ -370,6 +370,66 @@ app.post('/pull-image', async (req, res) => {
   }
 });
 
+
+// network
+app.post ('/network-list',async(req,res)=>{
+  try{
+    const dockerApiUrl = `http://127.0.0.1:2375/networks`;
+        const dockerApiresponse = await axios.get(dockerApiUrl,{httpsAgent});
+        console.log(dockerApiresponse.data);
+        res.json(dockerApiresponse.data);
+    } 
+    catch (error) 
+    {
+        console.error('connection error:', error);
+        res.status(500).send('Error connecting to the Docker');
+    }
+});
+
+app.post ('/inspect-network',async(req,res)=>{
+  try{
+    const dockerApiUrl = `http://127.0.0.1:2375/networks/todo-app`;
+        const dockerApiresponse = await axios.get(dockerApiUrl,{httpsAgent});
+        console.log(dockerApiresponse.data);
+        res.json(dockerApiresponse.data);
+    } 
+    catch (error) 
+    {
+        console.error('connection error:', error);
+        res.status(500).send('Error connecting to the Docker network');
+    }
+});
+
+app.post('/removing-network', async (req, res) => {
+  try {
+    const removeNetworkApi = 'http://127.0.0.1:2375/networks/43d';
+    const dockerApiResponse = await axios.delete(removeNetworkApi,{ httpsAgent });
+    console.log(dockerApiResponse.data);
+    res.json(dockerApiResponse.data);
+  } catch (error) {
+      console.error('Container Error:', error);
+      res.status(500).send('Error Removing Docker network');
+  }
+});
+
+app.post('/Create-network', async (req, res) => {
+  const networkData = {
+      "Name": "amjad",
+      "CheckDuplicate": true,
+      "Driver": "bridge",
+    };
+  try {
+    const createNetworkApi = 'http://127.0.0.1:2375/networks/create';
+    const dockerApiResponse = await axios.post(createNetworkApi, networkData, { httpsAgent });
+    console.log(dockerApiResponse.data);
+    res.json(dockerApiResponse.data);
+  } catch (error) {
+    console.error('Network Error:', error);
+    res.status(500).send('Error creating docker network');
+  }
+});
+
+
 app.listen(3001, () => {
   console.log('Server is running on port 3001');
 });
