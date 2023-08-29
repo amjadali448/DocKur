@@ -96,21 +96,25 @@ app.post ('/container-list',async(req,res)=>{
 
 app.post('/Create-container', async (req, res) => {
   const containerData = {
-    "Image": "nginx:latest",
-    "Name": "my-container1",
-    "Cmd": ["nginx", "-g", "daemon off;"],
+    "Image": "getting-started",
+    Env: [
+      "MYSQL_HOST=mysql",
+      "MYSQL_USER=root",
+      "MYSQL_PASSWORD=secret",
+      "MYSQL_DB=todos"
+    ],
     "HostConfig": {
       "PortBindings": {
-        "80/tcp": [
+        "3000/tcp": [
           {
-            "HostPort": "8080"
+            "HostPort": "3005"
           }
         ]
       }
     }
   };
   try {
-    const createContainerApi = 'http://127.0.0.1:2375/containers/create';
+    const createContainerApi = 'http://127.0.0.1:2375/containers/create?name=Pakistan';
     const dockerApiResponse = await axios.post(createContainerApi, containerData, { httpsAgent });
     console.log(dockerApiResponse.data);
     res.json(dockerApiResponse.data);
@@ -219,6 +223,29 @@ app.post('/unpause-container', async (req, res) => {
       console.error('Container Error:', error);
       res.status(500).send('Error Unpausing Docker Container');
     }
+  }
+});
+
+app.post('/update-port', async (req, res) => {
+  const containerId = '87ada2bb7535ecf0e385a26aaf94f3ce9c5852beba22c814bf2a0f8275dadd73';
+  const requestData = {
+    PortBindings: {
+      '3000/tcp': [
+        {
+          HostPort: '3005'
+        }
+      ]
+    },
+  };
+  try {
+    const dockerApiEndpoint = `http://127.0.0.1:2375/containers/${containerId}/update`;
+    const dockerApiResponse = await axios.post(dockerApiEndpoint, requestData);
+    console.log('Port bindings updated:', dockerApiResponse.data);
+
+    res.json({ message: 'Port bindings updated' });
+  } catch (error) {
+    console.error('Docker API Error:', error);
+    res.status(500).send('Error updating port bindings');
   }
 });
 
@@ -388,7 +415,7 @@ app.post ('/network-list',async(req,res)=>{
 
 app.post ('/inspect-network',async(req,res)=>{
   try{
-    const dockerApiUrl = `http://127.0.0.1:2375/networks/todo-app`;
+    const dockerApiUrl = `http://127.0.0.1:2375/networks/amjad`;
         const dockerApiresponse = await axios.get(dockerApiUrl,{httpsAgent});
         console.log(dockerApiresponse.data);
         res.json(dockerApiresponse.data);
@@ -402,7 +429,7 @@ app.post ('/inspect-network',async(req,res)=>{
 
 app.post('/removing-network', async (req, res) => {
   try {
-    const removeNetworkApi = 'http://127.0.0.1:2375/networks/43d';
+    const removeNetworkApi = 'http://127.0.0.1:2375/networks';
     const dockerApiResponse = await axios.delete(removeNetworkApi,{ httpsAgent });
     console.log(dockerApiResponse.data);
     res.json(dockerApiResponse.data);
@@ -429,6 +456,118 @@ app.post('/Create-network', async (req, res) => {
   }
 });
 
+app.post('/Connect-container', async (req, res) => {
+  const requestData = {
+    Container: 'cef1516090c3',
+
+  };
+  try {
+    const connectConatinerApi = 'http://127.0.0.1:2375/networks/amjad/connect';
+    const dockerApiResponse = await axios.post(connectConatinerApi,requestData, { httpsAgent });
+    console.log(dockerApiResponse.data);
+    res.json(dockerApiResponse.data);
+  } catch (error) {
+    console.error('Network Error:', error);
+    res.status(500).send('Error creating docker network');
+  }
+});
+
+app.post('/Disconnect-container', async (req, res) => {
+  const requestData = {
+    Container: '6f0a8bc6079e',
+    force:true
+  };
+  try {
+    const disconnectConatinerApi = 'http://127.0.0.1:2375/networks/amjad/disconnect';
+    const dockerApiResponse = await axios.post(disconnectConatinerApi,requestData, { httpsAgent });
+    console.log(dockerApiResponse.data);
+    res.json(dockerApiResponse.data);
+  } catch (error) {
+    console.error('Network Error:', error);
+    res.status(500).send('Error Disconnecting docker conatiner from a network');
+  }
+});
+
+app.post('/Delete-unused-Networks', async (req, res) => {
+  try {
+    const DeleteUnusedNetworksApi = 'http://127.0.0.1:2375/networks/prune';
+    const dockerApiResponse = await axios.post(DeleteUnusedNetworksApi, { httpsAgent });
+    console.log(dockerApiResponse.data);
+    res.json(dockerApiResponse.data);
+  } catch (error) {
+    console.error('Network Error:', error);
+    res.status(500).send('Error removing networks');
+  }
+});
+
+//Volumes
+app.post('/Create-volume', async (req, res) => {
+  const volumeData = {
+      "Name": "abc",
+      "Driver": "local",
+    };
+  try {
+    const createVolumeApi = 'http://127.0.0.1:2375/volumes/create';
+    const dockerApiResponse = await axios.post(createVolumeApi, volumeData, { httpsAgent });
+    console.log(dockerApiResponse.data);
+    res.json(dockerApiResponse.data);
+  } catch (error) {
+    console.error('Network Error:', error);
+    res.status(500).send('Error creating docker volume');
+  }
+});
+
+app.post ('/volume-list',async(req,res)=>{
+  try{
+    const volumeListApiUrl = `http://127.0.0.1:2375/volumes`;
+        const dockerApiresponse = await axios.get(volumeListApiUrl,{httpsAgent});
+        console.log(dockerApiresponse.data);
+        res.json(dockerApiresponse.data);
+    } 
+    catch (error) 
+    {
+        console.error('connection error:', error);
+        res.status(500).send('Error connecting to the Docker');
+    }
+});
+
+app.post ('/inspect-volume',async(req,res)=>{
+  try{
+    const dockerApiUrl = `http://127.0.0.1:2375/volumes/abc`;
+        const dockerApiresponse = await axios.get(dockerApiUrl,{httpsAgent});
+        console.log(dockerApiresponse.data);
+        res.json(dockerApiresponse.data);
+    } 
+    catch (error) 
+    {
+        console.error('connection error:', error);
+        res.status(500).send('Error connecting to the Docker volume');
+    }
+});
+
+app.post('/removing-volume', async (req, res) => {
+  try {
+    const removeVolumeApi = 'http://127.0.0.1:2375/volumes/abc?force=true';
+    const dockerApiResponse = await axios.delete(removeVolumeApi,{ httpsAgent });
+    console.log(dockerApiResponse.data);
+    res.json(dockerApiResponse.data);
+  } catch (error) {
+      console.error('Volume Error:', error);
+      res.status(500).send('Error Removing Docker volume');
+  }
+});
+
+app.post('/Delete-unused-volume', async (req, res) => {
+  try {
+    const DeleteUnusedVolumeApi = 'http://127.0.0.1:2375/volumes/prune';
+    const dockerApiResponse = await axios.post(DeleteUnusedVolumeApi, { httpsAgent });
+    console.log(dockerApiResponse.data);
+    res.json(dockerApiResponse.data);
+  } catch (error) {
+    console.error('volume Error:', error);
+    res.status(500).send('Error deleting volumes');
+  }
+});
 
 app.listen(3001, () => {
   console.log('Server is running on port 3001');
