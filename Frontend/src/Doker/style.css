@@ -1,0 +1,53 @@
+.popup-main {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 20%;
+    height: 70%;
+    background-color: #17222A;
+
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .drag-container,
+  .card-container {
+ 
+    background-color: transparent;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .drag-card,
+  .card {
+    /* background-color: #ffffff; */
+    /* border: 1px solid #ccc; */
+    padding: 5px;
+    margin: 5px 0;
+    cursor: grab;
+  }
+  
+  .popup {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #17222A;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    /* align-items: center; */
+    border: 2px solid #77cdb2;
+  }
+  .card-bg-color{
+    background-color: #17222A;
+    width: 270px;
+    height: 150px;
+  }
