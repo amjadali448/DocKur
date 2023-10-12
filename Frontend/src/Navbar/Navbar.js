@@ -1,22 +1,21 @@
 import React from 'react'
 import logo from "../Assets/logo.png";
 import text from "../Assets/text.png";
-import { useLocation, useNavigate } from 'react-router-dom';
+// import {  useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
-    let navigate = useNavigate();
 
     return (
         <div className="head bg-teal-400 px-4">
             <div className='flex'>
                 <svg className=" cursor-pointer " width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g filter="url(#filter0_i_484_253)">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.66575 15C11.8994 15 15.3315 11.6421 15.3315 7.5C15.3315 3.35786 11.8994 0 7.66575 0C3.43207 0 0 3.35786 0 7.5C0 11.6421 3.43207 15 7.66575 15Z" fill="#ED6A5E" />
+                        <path fillRule="evenodd" clipRule="evenodd" d="M7.66575 15C11.8994 15 15.3315 11.6421 15.3315 7.5C15.3315 3.35786 11.8994 0 7.66575 0C3.43207 0 0 3.35786 0 7.5C0 11.6421 3.43207 15 7.66575 15Z" fill="#ED6A5E" />
                     </g>
-                    <path d="M15.0815 7.5C15.0815 11.4989 11.7665 14.75 7.66575 14.75C3.56496 14.75 0.25 11.4989 0.25 7.5C0.25 3.50106 3.56496 0.25 7.66575 0.25C11.7665 0.25 15.0815 3.50106 15.0815 7.5Z" stroke="#CE5347" stroke-width="0.5" />
+                    <path d="M15.0815 7.5C15.0815 11.4989 11.7665 14.75 7.66575 14.75C3.56496 14.75 0.25 11.4989 0.25 7.5C0.25 3.50106 3.56496 0.25 7.66575 0.25C11.7665 0.25 15.0815 3.50106 15.0815 7.5Z" stroke="#CE5347" strokeWidth="0.5" />
                     <defs>
-                        <filter id="filter0_i_484_253" x="0" y="0" width="15.3315" height="15" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                        <filter id="filter0_i_484_253" x="0" y="0" width="15.3315" height="15" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                            <feFlood floodOpacity="0" result="BackgroundImageFix" />
                             <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
                             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
                             <feOffset />
@@ -30,12 +29,12 @@ export default function Navbar() {
 
                 <svg className='mx-2 cursor-pointer' width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g filter="url(#filter0_i_484_254)">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.21824 15C12.4519 15 15.884 11.6421 15.884 7.5C15.884 3.35786 12.4519 0 8.21824 0C3.98456 0 0.55249 3.35786 0.55249 7.5C0.55249 11.6421 3.98456 15 8.21824 15Z" fill="#F6BE4F" />
+                        <path fillRule="evenodd" clipRule="evenodd" d="M8.21824 15C12.4519 15 15.884 11.6421 15.884 7.5C15.884 3.35786 12.4519 0 8.21824 0C3.98456 0 0.55249 3.35786 0.55249 7.5C0.55249 11.6421 3.98456 15 8.21824 15Z" fill="#F6BE4F" />
                     </g>
-                    <path d="M15.634 7.5C15.634 11.4989 12.319 14.75 8.21824 14.75C4.11745 14.75 0.80249 11.4989 0.80249 7.5C0.80249 3.50106 4.11745 0.25 8.21824 0.25C12.319 0.25 15.634 3.50106 15.634 7.5Z" stroke="#D6A243" stroke-width="0.5" />
+                    <path d="M15.634 7.5C15.634 11.4989 12.319 14.75 8.21824 14.75C4.11745 14.75 0.80249 11.4989 0.80249 7.5C0.80249 3.50106 4.11745 0.25 8.21824 0.25C12.319 0.25 15.634 3.50106 15.634 7.5Z" stroke="#D6A243" strokeWidth="0.5" />
                     <defs>
-                        <filter id="filter0_i_484_254" x="0.55249" y="0" width="15.3315" height="15" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                        <filter id="filter0_i_484_254" x="0.55249" y="0" width="15.3315" height="15" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                            <feFlood floodOpacity="0" result="BackgroundImageFix" />
                             <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
                             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
                             <feOffset />
@@ -48,12 +47,12 @@ export default function Navbar() {
                 </svg>
                 <svg className=" cursor-pointer " width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g filter="url(#filter0_i_484_255)">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.77073 15C12.0044 15 15.4365 11.6421 15.4365 7.5C15.4365 3.35786 12.0044 0 7.77073 0C3.53705 0 0.10498 3.35786 0.10498 7.5C0.10498 11.6421 3.53705 15 7.77073 15Z" fill="#62C554" />
+                        <path fillRule="evenodd" clipRule="evenodd" d="M7.77073 15C12.0044 15 15.4365 11.6421 15.4365 7.5C15.4365 3.35786 12.0044 0 7.77073 0C3.53705 0 0.10498 3.35786 0.10498 7.5C0.10498 11.6421 3.53705 15 7.77073 15Z" fill="#62C554" />
                     </g>
-                    <path d="M15.1865 7.5C15.1865 11.4989 11.8715 14.75 7.77073 14.75C3.66994 14.75 0.35498 11.4989 0.35498 7.5C0.35498 3.50106 3.66994 0.25 7.77073 0.25C11.8715 0.25 15.1865 3.50106 15.1865 7.5Z" stroke="#58A942" stroke-width="0.5" />
+                    <path d="M15.1865 7.5C15.1865 11.4989 11.8715 14.75 7.77073 14.75C3.66994 14.75 0.35498 11.4989 0.35498 7.5C0.35498 3.50106 3.66994 0.25 7.77073 0.25C11.8715 0.25 15.1865 3.50106 15.1865 7.5Z" stroke="#58A942" strokeWidth="0.5" />
                     <defs>
-                        <filter id="filter0_i_484_255" x="0.10498" y="0" width="15.3315" height="15" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                        <filter id="filter0_i_484_255" x="0.10498" y="0" width="15.3315" height="15" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                            <feFlood floodOpacity="0" result="BackgroundImageFix" />
                             <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
                             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
                             <feOffset />
