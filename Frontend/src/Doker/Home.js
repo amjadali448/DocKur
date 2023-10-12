@@ -14,6 +14,40 @@ export const Home = ({ getDockerData }, props) => {
   const [voluemShow, setVoluemShow] = useState(false)
   const [popupCardNetwork, setPopupCardNetwork] = useState(true)
   const [logsInsSwitch, setLogsInsSwitch] = useState(false)
+  const [ipAddress, setIpAddress] = useState('');
+  const [extractedWords, setExtractedWords] = useState([]);
+
+  const handleConnect = () => {
+    console.log({ipAddress});
+    
+    fetch('http://localhost:3001/connect-ubuntu', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ipAddress }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Error in fetching the docker images');
+      })
+        .then((data) => {
+          console.log(typeof(data));
+          console.log(data);
+          const imageNames = data.map(item => item.RepoTags);
+          console.log(imageNames);
+          setExtractedWords(imageNames);
+      })
+      .catch((error) => {
+        console.error('API request error:', error);
+      });
+  };
+
+  const handleInputChange = (event) => {
+    setIpAddress(event.target.value);
+  };
 
   const handlePopupChange = (popupName) => {
     console.log("popupName", popupName);
@@ -231,8 +265,9 @@ export const Home = ({ getDockerData }, props) => {
       {/* <Sidebar /> */}
       <div className="nav relative  items-center flex flex-col h-full bg-teal-200">
         <p className='text-3xl my-2 text-teal-400'>Connect</p>
-        <input type="text" className="text-white ip my-2 w-10/12 p-2 rounded-md border-b item-center" placeholder="192.168.0.0"></input>
-        <button type="button" className=" font-semibold bg-teal-400  p-1 text-md w-10/12 rounded-md">Connect</button>
+        <input type="text" className="text-white ip my-2 w-10/12 p-2 rounded-md border-b item-center" placeholder="192.168.0.0" value={ipAddress}
+        onChange={handleInputChange}></input>
+        <button type="button" className=" font-semibold bg-teal-400  p-1 text-md w-10/12 rounded-md" onClick={handleConnect}>Connect</button>
 
 
         {/* Tabs Section */}
