@@ -3,15 +3,14 @@ const bodyParser = require('body-parser');
 const https = require('https');
 const axios = require('axios');
 const fs = require('fs');
-const { NodeSSH } = require('node-ssh');
-
+const cors = require('cors');
 
 
 
 const app = express();
 app.use(bodyParser.json());
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*'); 
+    res.setHeader('Access-Control-Allow-Origin', '*','http://localhost:3000'); 
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     next();
@@ -21,29 +20,24 @@ app.use(bodyParser.json());
 const httpsAgent = new https.Agent({
     rejectUnauthorized: false
 });
-const privateKey = fs.readFileSync('/home/amjad/Downloads/key1.pem', 'utf8');
-app.post('/execute-ssh', async(req, res) =>  {
-  const ipAddress = req.body['ipAddress']
-  console.log(ipAddress);
-  const ssh = new NodeSSH();
-  const sshConfig = {
-    host: ipAddress,
-    port: 22,
-    username: 'ubuntu',
-    privateKey: privateKey
-};
-  try {
-    await ssh.connect(sshConfig);
-    console.log("SSH connection successful");
+let ipAddressGlobal = '';
+app.post('/connect-ubuntu', async (req, res) => {
+  const ipAddress = req.body.ipAddress;
+  ipAddressGlobal = '127.0.0.1';
+  console.log(ipAddress); 
 
-    const dockerApiUrl = `http://54.210.126.34:2375/images/json`;
-    const dockerApiresponse = await axios.get(dockerApiUrl,{httpsAgent});
-    console.log(dockerApiresponse.data);
-    res.json(dockerApiresponse.data);
-  } catch (error) {
-    console.error('SSH connection error:', error);
-    res.status(500).send('Error connecting to the EC2 instance');
-  }
+    try
+    {
+        const dockerApiUrl = `http://${ipAddressGlobal}:2375/images/json`;
+        const dockerApiresponse = await axios.get(dockerApiUrl,{httpsAgent});
+        console.log(dockerApiresponse.data);
+        res.json(dockerApiresponse.data);
+    } 
+    catch (error) 
+    {
+        console.error('connection error:', error);
+        res.status(500).send('Error connecting to the Docker');
+    }
 });
 
 app.post ('/inspect-container',async(req,res)=>{
