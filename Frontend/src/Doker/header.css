@@ -135,7 +135,7 @@
     background-color: #17222A;
     border: 1px solid #ccc;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    justify-content: center;
+    /* justify-content: center; */
     /* align-items: center; */
     border: 2px solid #77cdb2;
 }
