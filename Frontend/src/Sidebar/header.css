@@ -1,58 +1,50 @@
-.head {
+.head{
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #77cdb2;
     height: 8%;
 }
-
-.bg-teal {
+.bg-teal{
     background-color: #77cdb2;
 }
-
 .head-logo {
     margin-top: 2px;
     height: 31px;
 }
-
-.head-text {
+.head-text{
     margin-top: 10px;
     height: 16px;
 }
-
-.nav {
-
+.nav{
+  
     width: 250px;
     background-color: #17222A;
 }
 
-.bottom-img {
+.bottom-img{
     margin-top: 4px;
     height: 26px;
     -webkit-filter: invert(100%);
     filter: invert(100%);
 }
+.connect{
 
-.connect {
-
-
-
+   
+   
     background-color: #77cdb2;
     font-size: 20px;
 }
-
-.ip {
+.ip{
     background-color: #27353f;
 }
-
-.line {
+.line{
     top: 60px;
     color: #27353f;
-    position: absolute;
+    position:absolute;
     font-weight: bolder;
 }
-
-.firstbuttons {
+.firstbuttons{
     margin-left: 4px;
     margin-top: 80px;
     background-color: transparent;
@@ -64,10 +56,9 @@
     color: white;
     font-size: 25px;
 }
-
-.buttons {
+.buttons{
     margin-left: 4px;
-    margin-top: 20px;
+    margin-top:20px;
     background-color: transparent;
     background-repeat: no-repeat;
     border: none;
@@ -80,68 +71,15 @@
 
 .drop-down {
     list-style: none;
-}
-
-.drop-down li {
+  }
+  
+  .drop-down li {
     padding: 10px 0px;
     border-bottom: 1px solid #cccccc;
     width: 100px;
     text-align: center;
     background: #fbf6f6;
-}
-
-.popup-main {
-    position: absolute;
-    top: 20%;
-    left: 10%;
-    width: 20%;
-    height: 70%;
-    background-color: #17222A;
-
-}
-
-.container {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-}
-
-.drag-container,
-.card-container {
-
-    background-color: transparent;
-    padding: 10px;
-    width: 100%;
-    height: 100%;
-}
-
-.drag-card,
-.card {
-    /* background-color: #ffffff; */
-    /* border: 1px solid #ccc; */
-    padding: 5px;
-    margin: 5px 0;
-    cursor: grab;
-}
-
-.popup {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: #17222A;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    justify-content: center;
-    /* align-items: center; */
-    border: 2px solid #77cdb2;
-}
-
-.card-bg-color {
-    background-color: #17222A;
-    width: 270px;
-    height: 150px;
-}
+  }
+  .bg:hover{
+    background-color: #475E6E;
+  }

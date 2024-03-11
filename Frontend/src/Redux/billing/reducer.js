@@ -5,7 +5,10 @@ import {
 } from "../constants";
 
 export const initialState = {
-   
+    user: null,
+    tokens: {},
+    userCreated: false,
+    passwordUpdate: ''
 };
 
 export default function (state = initialState, action) {
