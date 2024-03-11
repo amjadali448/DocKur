@@ -1,0 +1,101 @@
+[
+    {
+      "_id": "6516a6a339d138a536479104",
+      "index": 0,
+      "guid": "3a529c53-871d-4f33-8c4e-7ea32e38978e",
+      "isActive": true,
+      "version": 0.56,
+      "picture": "http://placehold.it/32x32",
+      "name": "alpine",
+      "networkname": "COMVENE",
+      "favoriteFruit": "apple"
+    },
+    {
+      "_id": "6516a6a30b6972fb2d4e6ce0",
+      "index": 1,
+      "guid": "152afe32-8b7e-4f03-8ee2-9628c8bcf4ae",
+      "isActive": false,
+      "version": 0.12,
+      "picture": "http://placehold.it/32x32",
+      "name": "balpine1",
+      "networkname": "PLUTORQUE",
+      "favoriteFruit": "strawberry"
+    },
+    {
+      "_id": "6516a6a3ab03bddcf17275fb",
+      "index": 2,
+      "guid": "08467cb5-09f4-4048-9757-d42cff7b13d8",
+      "isActive": true,
+      "version": 1.02,
+      "picture": "http://placehold.it/32x32",
+      "name": "alpinex",
+      "networkname": "MINGA",
+      "favoriteFruit": "banana"
+    },
+    {
+      "_id": "6516a6a3c54556482bbcf461",
+      "index": 3,
+      "guid": "68dd4947-c5fa-4157-a5d7-9ac8fc57446e",
+      "isActive": false,
+      "version": 0.45,
+      "picture": "http://placehold.it/32x32",
+      "name": "alpine xd",
+      "networkname": "TUBALUM",
+      "favoriteFruit": "banana"
+    },
+    {
+      "_id": "6516a6a386fc0f1fa0207a47",
+      "index": 4,
+      "guid": "f7215813-2cf7-489f-88be-e9da020c9223",
+      "isActive": true,
+      "version": 1,
+      "picture": "http://placehold.it/32x32",
+      "name": "alpine2",
+      "networkname": "DENTREX",
+      "favoriteFruit": "banana"
+    },
+    {
+      "_id": "6516a6a34fa6d5ffb9a1d540",
+      "index": 5,
+      "guid": "3b450a10-1d86-4bc4-94ef-6330d6033098",
+      "isActive": false,
+      "version": 0.53,
+      "picture": "http://placehold.it/32x32",
+      "name": "alpine3r",
+      "networkname": "EXPOSA",
+      "favoriteFruit": "strawberry"
+    },
+    {
+      "_id": "6516a6a336884ba001bb7e45",
+      "index": 6,
+      "guid": "78d8de15-f2bb-4b47-ad66-1dbbf0b3533a",
+      "isActive": true,
+      "version": 0.12,
+      "picture": "http://placehold.it/32x32",
+      "name": "alpine4",
+      "networkname": "JETSILK",
+      "favoriteFruit": "banana"
+    },
+    {
+      "_id": "6516a6a3b3c5eca5f9c4999d",
+      "index": 7,
+      "guid": "6d09c7cd-f3cd-4531-a7a4-e5034b67cc50",
+      "isActive": true,
+      "version": 0.31,
+      "picture": "http://placehold.it/32x32",
+      "name": "alpine",
+      "networkname": "KEEG",
+      "favoriteFruit": "banana"
+    },
+    {
+      "_id": "6516a6a3125e9a26ea3c92c8",
+      "index": 8,
+      "guid": "c278ca82-b34f-4b11-b639-79e8f3e88c1d",
+      "isActive": false,
+      "version": 0.42,
+      "picture": "http://placehold.it/32x32",
+      "name": "alpineex",
+      "networkname": "ASSITIA",
+      "favoriteFruit": "banana"
+    }
+  ]
