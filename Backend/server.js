@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 const httpsAgent = new https.Agent({
   rejectUnauthorized: false
 });
- const privateKey = fs.readFileSync('/home/amjad/Downloads/Key1.pem', 'utf8');
+ //const privateKey = fs.readFileSync('/home/amjad/Downloads/Key1.pem', 'utf8');
 //const privateKey = fs.readFileSync('D:\\Key1.pem', 'utf8');
 let ipAddress = "127.0.0.1";
 
